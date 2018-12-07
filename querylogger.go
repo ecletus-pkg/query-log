@@ -1,1 +1,1 @@
-package querylogger
+package querylog
