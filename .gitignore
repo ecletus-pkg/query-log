@@ -10,3 +10,9 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+# All hidden files
+.*
+
+# Vim swap files
+*.swp
