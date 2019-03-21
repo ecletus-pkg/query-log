@@ -1,2 +1,2 @@
 # query-log
-Aghape Database Query Logger features
+Ecletus Database Query Logger features

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/aghape/core"
+	"github.com/ecletus/core"
 	"github.com/moisespsena-go/aorm"
 )
 

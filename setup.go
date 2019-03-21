@@ -10,8 +10,8 @@ import (
 
 	"github.com/moisespsena-go/aorm"
 
-	"github.com/aghape/aghape"
-	"github.com/aghape/core"
+	"github.com/ecletus/ecletus"
+	"github.com/ecletus/core"
 )
 
 type Output struct {
@@ -106,7 +106,7 @@ func initOutputs(cfg *Config) (outputs []*Output) {
 	return
 }
 
-func Setup(cfg *Config, agp *aghape.Aghape, sites core.SitesReaderInterface) {
+func Setup(cfg *Config, agp *ecletus.Ecletus, sites core.SitesReaderInterface) {
 	var (
 		outputs = initOutputs(cfg)
 	)

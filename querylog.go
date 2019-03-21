@@ -1,10 +1,10 @@
 package querylog
 
 import (
-	"github.com/aghape/aghape"
-	"github.com/aghape/cli"
-	"github.com/aghape/core"
-	"github.com/aghape/plug"
+	"github.com/ecletus/ecletus"
+	"github.com/ecletus/cli"
+	"github.com/ecletus/core"
+	"github.com/ecletus/plug"
 	"github.com/moisespsena/go-default-logger"
 	"github.com/moisespsena/go-error-wrap"
 	"github.com/moisespsena/go-path-helpers"
@@ -28,12 +28,12 @@ func (p *Plugin) RequireOptions() []string {
 
 func (p *Plugin) OnRegister(options *plug.Options) {
 	cli.OnRegister(p, func(e *cli.RegisterEvent) {
-		p.cfgFile = options.GetInterface(p.ConfigDirKey).(*aghape.ConfigDir).Path(CFG_FILE)
+		p.cfgFile = options.GetInterface(p.ConfigDirKey).(*ecletus.ConfigDir).Path(CFG_FILE)
 	})
 
 	p.On(plug.E_POST_INIT, func(e plug.PluginEventInterface) (err error) {
 		if p.cfg != nil {
-			agp := options.GetInterface(aghape.AGHAPE).(*aghape.Aghape)
+			agp := options.GetInterface(ecletus.AGHAPE).(*ecletus.Ecletus)
 			Sites := options.GetInterface(p.SitesReaderKey).(core.SitesReaderInterface)
 			Setup(p.cfg, agp, Sites)
 		}
@@ -46,7 +46,7 @@ func (p *Plugin) Init(options *plug.Options) {
 }
 
 func (p *Plugin) loadConfig(options *plug.Options) (cfg *Config) {
-	configDir := options.GetInterface(p.ConfigDirKey).(*aghape.ConfigDir)
+	configDir := options.GetInterface(p.ConfigDirKey).(*ecletus.ConfigDir)
 	if ok, err := configDir.Exists(CFG_FILE); err != nil {
 		log.Error(errwrap.Wrap(err, "Stat of %q", configDir.Path(CFG_FILE)))
 		return nil
