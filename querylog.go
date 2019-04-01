@@ -5,9 +5,9 @@ import (
 	"github.com/ecletus/cli"
 	"github.com/ecletus/core"
 	"github.com/ecletus/plug"
-	"github.com/moisespsena/go-default-logger"
+	"github.com/moisespsena-go/default-logger"
 	"github.com/moisespsena/go-error-wrap"
-	"github.com/moisespsena/go-path-helpers"
+	"github.com/moisespsena-go/path-helpers"
 )
 
 const CFG_FILE = "query-log.yaml"
