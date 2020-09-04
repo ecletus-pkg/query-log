@@ -106,12 +106,12 @@ func initOutputs(cfg *Config) (outputs []*Output) {
 	return
 }
 
-func Setup(cfg *Config, agp *ecletus.Ecletus, sites core.SitesReaderInterface) {
+func Setup(cfg *Config, agp *ecletus.Ecletus, sites *core.SitesRegister) {
 	var (
 		outputs = initOutputs(cfg)
 	)
 
-	_ = sites.Each(func(site core.SiteInterface) (err error) {
+	sites.OnAdd(func(site *core.Site) {
 		for _, o := range outputs {
 			for _, r := range o.Rules {
 				if r.Sites.Accept(site.Name()) {
@@ -139,7 +139,6 @@ func Setup(cfg *Config, agp *ecletus.Ecletus, sites core.SitesReaderInterface) {
 				}
 			}
 		}
-		return
 	})
 
 	agp.Done(func() {

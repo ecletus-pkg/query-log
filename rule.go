@@ -32,7 +32,7 @@ type ContainsRule struct {
 }
 
 func (r ContainsRule) Accept(s *aorm.Scope) bool {
-	return strings.Contains(s.SQL, r.Term)
+	return strings.Contains(s.Query.Query, r.Term)
 }
 
 type RegexRule struct {
@@ -40,7 +40,7 @@ type RegexRule struct {
 }
 
 func (r RegexRule) Accept(s *aorm.Scope) bool {
-	return r.Term.MatchString(s.SQL)
+	return r.Term.MatchString(s.Query.Query)
 }
 
 type Rule struct {
@@ -48,7 +48,7 @@ type Rule struct {
 	Term TermRule
 }
 
-func (r *Rule) Accept(ctx *core.Context, site core.SiteInterface, action string, scope *aorm.Scope) bool {
+func (r *Rule) Accept(ctx *core.Context, site *core.Site, action string, scope *aorm.Scope) bool {
 	if !r.Actions.Accept(action) {
 		return false
 	}

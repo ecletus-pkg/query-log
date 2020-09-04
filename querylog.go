@@ -12,14 +12,14 @@ import (
 
 const CFG_FILE = "query-log.yaml"
 
-var log = defaultlogger.NewLogger(path_helpers.GetCalledDir())
+var log = defaultlogger.GetOrCreateLogger(path_helpers.GetCalledDir())
 
 type Plugin struct {
 	plug.EventDispatcher
-	ConfigDirKey   string
-	SitesReaderKey string
-	cfg            *Config
-	cfgFile        string
+	ConfigDirKey     string
+	SitesRegisterKey string
+	cfg              *Config
+	cfgFile          string
 }
 
 func (p *Plugin) RequireOptions() []string {
@@ -33,8 +33,8 @@ func (p *Plugin) OnRegister(options *plug.Options) {
 
 	p.On(plug.E_POST_INIT, func(e plug.PluginEventInterface) (err error) {
 		if p.cfg != nil {
-			agp := options.GetInterface(ecletus.AGHAPE).(*ecletus.Ecletus)
-			Sites := options.GetInterface(p.SitesReaderKey).(core.SitesReaderInterface)
+			agp := options.GetInterface(ecletus.ECLETUS).(*ecletus.Ecletus)
+			Sites := options.GetInterface(p.SitesRegisterKey).(*core.SitesRegister)
 			Setup(p.cfg, agp, Sites)
 		}
 		return nil	
